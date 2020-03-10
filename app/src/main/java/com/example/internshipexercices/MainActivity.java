@@ -3,6 +3,7 @@ package com.example.internshipexercices;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -16,6 +17,7 @@ import java.lang.annotation.Target;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String COUNTER_BUNDLE="numberOfClicks";
     private int incrementValue=0;
 
     private TextView incrementTextView;
@@ -28,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG,"onCreate: Happy to be born");
         InitViews();
 
+
+
         if(savedInstanceState!=null) {
-            incrementValue = savedInstanceState.getInt("numberOfClicks");
+            incrementValue = savedInstanceState.getInt(COUNTER_BUNDLE);
             incrementTextView.setText(incrementValue + "");
         }
     }
@@ -38,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("numberOfClicks",incrementValue);
+        outState.putInt(COUNTER_BUNDLE,incrementValue);
+
     }
 
     private void InitViews(){
